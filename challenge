@@ -1,0 +1,20 @@
+-- ATUALIAZAR COR DO VEICULO QUE POSSUI PLACA XYZ9876 P/ 'Azul Marinho'
+
+  UPTADE Veiculos
+  SET cor = "Azul Marinho"
+  WHERE placa = "XYZ9876";
+
+-- LISTE OS MOTORISTAS QUE POSSUEM MAIS DE UM VEICULO
+
+  SELECT COUNT(*) AS qtd_veiculos, id_motorista 
+  FROM Veiculos 
+  GROUP BY id_motorista
+
+-- cria uma visualizacao, nome da zona, total de sensores por zona, total de sensores ocupados
+  SELECT 
+  z.nome_zona,
+  COUNT(s.id_sensor) AS total_sensores,
+  SUM(CASE WHEN s.ocupado = TRUE THEN 1 ELSE 0 END) AS sensores_ocupados
+  FROM Zonas z
+  LEFT JOIN Sensores s ON z.id_zona = s.id_zona
+  GROUP BY z.nome_zona;
