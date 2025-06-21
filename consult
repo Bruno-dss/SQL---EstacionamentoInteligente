@@ -1,0 +1,20 @@
+-- VERIFICAR A QUANTIDADE DE VAGAS OCUPADAS POR ZONA
+
+SELECT z.nome_zona, COUNT(s.id_sensor) AS vagas_ocupadas
+FROM Zonas z
+JOIN Sensores s ON z.id_zona = s.id_zona
+WHERE s.ocupado = TRUE
+GROUP BY z.nome_zona;
+
+-- LISTAR TODOS OS VEICULOS ESTACIONADOS NO MOMENTO (SEM HORA DE SAIDA REGISTRADA)
+SELECT v.placa, v.modelo, m.nome AS motorista, z.nome_zona
+FROM Tickets t
+JOIN Veiculos v ON t.placa_veiculo = v.placa
+JOIN Motoristas m ON v.id_motorista = m.id_motorista
+JOIN Zonas z ON t.id_zona = z.id_zona
+WHERE t.hora_saida IS NULL;
+
+-- TEMPO TOTAL DE PERMANENCIA POR TICKET(EM MINUTOS)
+SELECT id_ticket, TIMESTAMPDIFF(MINUTE, hora_entrada, hora_saida) AS tempo_em_minutos
+FROM Tickets
+WHERE hora_saida IS NOT NULL;
