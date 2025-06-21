@@ -1,0 +1,38 @@
+CREATE DATABASE EstacionamentoInteligente;
+USE EstacionamentoInteligente;
+
+CREATE TABLE Zonas (
+    id_zona INT PRIMARY KEY AUTO_INCREMENT,
+    nome_zona VARCHAR(100) NOT NULL,
+    tipo_zona ENUM('Rotativo', 'Privado', 'Carga e Descarga') NOT NULL,
+    capacidade_total INT NOT NULL
+);
+CREATE TABLE Motoristas (
+    id_motorista INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    telefone VARCHAR(15)
+);
+CREATE TABLE Veiculos (
+    placa VARCHAR(8) PRIMARY KEY,
+    modelo VARCHAR(50),
+    cor VARCHAR(20),
+    id_motorista INT,
+    FOREIGN KEY (id_motorista) REFERENCES Motoristas(id_motorista)
+);
+CREATE TABLE Tickets (
+    id_ticket INT PRIMARY KEY AUTO_INCREMENT,
+    placa_veiculo VARCHAR(8),
+    id_zona INT,
+    hora_entrada DATETIME,
+    hora_saida DATETIME,
+    FOREIGN KEY (placa_veiculo) REFERENCES Veiculos(placa),
+    FOREIGN KEY (id_zona) REFERENCES Zonas(id_zona)
+);
+CREATE TABLE Sensores (
+    id_sensor INT PRIMARY KEY AUTO_INCREMENT,
+    id_zona INT,
+    localizacao VARCHAR(100),
+    ocupado BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (id_zona) REFERENCES Zonas(id_zona)
+);
