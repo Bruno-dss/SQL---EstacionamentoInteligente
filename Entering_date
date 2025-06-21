@@ -1,0 +1,21 @@
+INSERT INTO Zonas (nome_zona, tipo_zona, capacidade_total) VALUES
+('Zona A1', 'Rotativo', 20),
+('Zona B2', 'Privado', 15),
+('Zona C3', 'Carga e Descarga', 10);
+
+INSERT INTO Motoristas (nome, cpf, telefone) VALUES
+('Lais Natera', '123.456.789-00', '11988887777'),
+('Bruno Souza', '987.654.321-00', '11999996666');
+
+INSERT INTO Veiculos (placa, modelo, cor, id_motorista) VALUES
+('ABC1234', 'Fiat Uno', 'Prata', 1),
+('XYZ9876', 'Chevrolet Onix', 'Preto', 2);
+
+INSERT INTO Tickets (placa_veiculo, id_zona, hora_entrada, hora_saida) VALUES
+('ABC1234', 1, '2025-06-20 08:30:00', '2025-06-20 10:00:00'),
+('XYZ9876', 2, '2025-06-20 09:00:00', NULL);
+
+INSERT INTO Sensores (id_zona, localizacao, ocupado) VALUES
+(1, 'Vaga 1 - Zona A1', TRUE),
+(1, 'Vaga 2 - Zona A1', FALSE),
+(2, 'Vaga 1 - Zona B2', TRUE);
